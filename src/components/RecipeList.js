@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import { Button } from 'semantic-ui-react'
 import {Card} from 'semantic-ui-react';
 import RecipeCard from './RecipeCard';
-import {recentRecipes} from "../actions/actionCreator";
 
 class RecipeList extends Component {
   constructor(props) {
