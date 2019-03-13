@@ -8,3 +8,13 @@ export function getRecentRecipes(app){
     return data.data;
   })
 }
+
+export function createRecipe(app, name, description, ingredients, imageURL){
+  const recipes = app.service('recipes');
+  return recipes.create({
+    name,
+    description,
+    ingredients,
+    imageURL
+  }).then((data, err)=>data);
+}

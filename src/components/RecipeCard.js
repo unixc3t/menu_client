@@ -5,8 +5,10 @@ function RecipeCard(props) {
     return (
       <Card
         centered={true}
+        image={recipe.imageURL}
         header={recipe.name}
         meta='Description'
+        description={recipe.description || 'No description'}
       />
     )
 }

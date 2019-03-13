@@ -10,10 +10,9 @@ class RecipeList extends Component {
 
   render() {
     return (
-      <div>recipeList
+      <div>
       <Card.Group itemsPerRow={5}>
         {this.props.recipes.map((recipe, index) => <RecipeCard {...this.props} key={index} recipe={recipe}/>)}
-        {/*this.props.recipes.map((recipe, index) => <RecipeCard {...this.props} key={index} recipe={recipe}/>)*/}
       </Card.Group>
       </div>
     )
