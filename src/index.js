@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
-import AddRecipe from './components/AddRecipe';
+import App from './components/app'
+import AddRecipe from './components/addRecipe';
 import 'semantic-ui-css/semantic.min.css'
 import { Provider } from 'react-redux';
 import {Router, Route, Switch, Link} from 'react-router-dom';

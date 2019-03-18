@@ -16,7 +16,7 @@ const browserHistory = createBrowserHistory();
 }*/
 
 
-function* fetchRecentRecipes(feathersApp) {
+export function* fetchRecentRecipes(feathersApp) {
   const recipes = yield call(getRecentRecipes, feathersApp);
   yield put({type: RECENT_RECIPES_REQUESTED, payload: {recipes}});
 }
@@ -25,11 +25,11 @@ export function* recentRecipesSaga(feathersApp) {
   yield takeEvery(RECENT_RECIPES_REQUESTED_ASYNC, fetchRecentRecipes, feathersApp)
 }
 
-function* addRecipe(feathersApp, action) {
-  console.log(action);
+export function* addRecipe(feathersApp, action) {
+  //console.log(action);
   const recipe = yield call(createRecipe, feathersApp
     ,action.name, action.description, action.ingredients,action.imageURL);
-  console.log(recipe);
+  //console.log(recipe);
   yield browserHistory.push('/');
   //yield put({type: ADD_RECIPE, payload: {recipe}});
 }

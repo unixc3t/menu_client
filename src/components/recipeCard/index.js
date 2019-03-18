@@ -4,6 +4,7 @@ function RecipeCard(props) {
     const {recipe} = props;
     return (
       <Card
+        data-test='recipeCardComponent'
         centered={true}
         image={recipe.imageURL}
         header={recipe.name}

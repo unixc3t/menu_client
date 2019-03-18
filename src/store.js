@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 import createSagaMiddleware from 'redux-saga';
-import mySaga from './sagas/sagas';
+import mySaga from './sagas';
 import rootReducer from './reducers';
 import superagent from 'superagent';
 import feathers from '@feathersjs/feathers';

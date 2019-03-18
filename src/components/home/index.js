@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import RecipeList from './RecipeList';
+import RecipeList from '../recipeList';
 import {Divider} from 'semantic-ui-react';
 import {bindActionCreators} from "redux";
 import {connect} from 'react-redux';
-import * as actionCreators from '../actions/actionCreator';
+import * as actionCreators from '../../actions/actionCreator';
 
 class Home extends Component {
   render() {

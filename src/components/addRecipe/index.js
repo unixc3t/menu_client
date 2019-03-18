@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Form, Message} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
-import * as actionCreators from "../actions/actionCreator";
+import * as actionCreators from "../../actions/actionCreator";
 
 class AddRecipe extends Component {
   constructor(props) {
