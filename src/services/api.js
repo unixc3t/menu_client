@@ -18,3 +18,13 @@ export function createRecipe(app, name, description, ingredients, imageURL){
     imageURL
   }).then((data, err)=>data);
 }
+
+export function fetchRecipe(app, id){
+  const recipes = app.service('recipes');
+  return recipes.find({
+    query:{
+      '$limit':1,
+      '_id':id
+    }
+  }).then((data,err)=>data.data)
+}

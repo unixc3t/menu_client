@@ -1,6 +1,7 @@
 import {
   RECENT_RECIPES_REQUESTED_ASYNC,
-  ADD_RECIPE_ASYNC
+  ADD_RECIPE_ASYNC,
+  RECIPE_FETCH_REQUESTED_ASYNC
 } from "./actionType";
 
 export function recentRecipes(){
@@ -16,5 +17,12 @@ export function addRecipe(name, description, ingredients, imageURL){
     description,
     ingredients ,
     imageURL
+  }
+}
+
+export function fetchRecipe(id){
+  return{
+    type:RECIPE_FETCH_REQUESTED_ASYNC,
+    id
   }
 }

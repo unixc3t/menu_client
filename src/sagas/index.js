@@ -1,12 +1,14 @@
-import {put, all, takeEvery, call} from 'redux-saga/effects';
-import {getRecentRecipes,
-        createRecipe
+import {put, all, takeEvery, call, fork} from 'redux-saga/effects';
+import {
+  getRecentRecipes,
+  createRecipe,
+  fetchRecipe
 } from '../services/api';
 import {createBrowserHistory} from 'history';
 //import {recentRecipes} from "../actions/actionCreator";
 import {
   RECENT_RECIPES_REQUESTED, RECENT_RECIPES_REQUESTED_ASYNC,
-  ADD_RECIPE, ADD_RECIPE_ASYNC
+  ADD_RECIPE_ASYNC, RECIPE_FETCH_REQUESTED_ASYNC, RECIPE_FETCH_REQUESTED
 } from "../actions/actionType";
 
 const browserHistory = createBrowserHistory();
@@ -26,22 +28,30 @@ export function* recentRecipesSaga(feathersApp) {
 }
 
 export function* addRecipe(feathersApp, action) {
-  //console.log(action);
-  const recipe = yield call(createRecipe, feathersApp
-    ,action.name, action.description, action.ingredients,action.imageURL);
-  //console.log(recipe);
-  yield browserHistory.push('/');
-  //yield put({type: ADD_RECIPE, payload: {recipe}});
+  yield call(createRecipe, feathersApp
+    , action.name, action.description, action.ingredients, action.imageURL);
+  yield browserHistory.push('');
 }
 
 export function* addRecipeSaga(feathersApp) {
   yield takeEvery(ADD_RECIPE_ASYNC, addRecipe, feathersApp)
 }
 
+export function* callFetchRecipe(feathersApp, action){
+  const recipe = yield call(fetchRecipe,feathersApp,action.id);
+
+  yield put({type: RECIPE_FETCH_REQUESTED, payload: {recipe:recipe[0]}});
+
+}
+export function* fetchRecipeSaga(feathersApp){
+  yield takeEvery(RECIPE_FETCH_REQUESTED_ASYNC, callFetchRecipe, feathersApp)
+}
+
 export default function* root(feathersApp) {
   yield all([
     //call(helloSaga),
-    call(recentRecipesSaga, feathersApp),
-    call(addRecipeSaga, feathersApp),
+    fork(recentRecipesSaga, feathersApp),
+    fork(addRecipeSaga, feathersApp),
+    fork(fetchRecipeSaga, feathersApp),
   ])
 }

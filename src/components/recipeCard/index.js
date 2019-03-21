@@ -1,5 +1,7 @@
 import React from 'react';
 import {Card} from 'semantic-ui-react'
+import {browserHistory} from "../../store";
+
 function RecipeCard(props) {
     const {recipe} = props;
     return (
@@ -10,6 +12,7 @@ function RecipeCard(props) {
         header={recipe.name}
         meta='Description'
         description={recipe.description || 'No description'}
+        onClick={()=>browserHistory.push(`view/${recipe._id}`)}
       />
     )
 }

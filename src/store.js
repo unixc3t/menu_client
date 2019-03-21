@@ -11,7 +11,7 @@ import superagent from 'superagent';
 import feathers from '@feathersjs/feathers';
 import rest from '@feathersjs/rest-client'
 import auth from '@feathersjs/authentication-client';
-const browserHistory = createBrowserHistory();
+export const browserHistory = createBrowserHistory();
 const defaultStore = {};
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(

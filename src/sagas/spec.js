@@ -1,20 +1,20 @@
-import {fetchRecentRecipes} from './index';
+import {callFetchRecipe, fetchRecentRecipes} from './index';
 import nock from 'nock';
 import SagaTester from 'redux-saga-tester';
 import rootReducer from '../reducers';
-import {getRecentRecipes} from '../services/api';
+import {getRecentRecipes,fetchRecipe} from '../services/api';
 import {put, call} from 'redux-saga/effects';
-import {RECENT_RECIPES_REQUESTED, RECENT_RECIPES_REQUESTED_ASYNC} from "../actions/actionType";
+import {RECENT_RECIPES_REQUESTED, RECENT_RECIPES_REQUESTED_ASYNC,RECIPE_FETCH_REQUESTED} from "../actions/actionType";
 import {app} from '../store';
 
 
-describe('test fetchrecentRecipes saga actions', function () {
+describe('fetchRecentRecipesSaga', function () {
   const gen = fetchRecentRecipes(app);
-  it('call(getRecentRecipes, feathersApp)', () => {
+  it('should call', () => {
     expect(gen.next().value).toEqual(call(getRecentRecipes, app));
   });
 
-  it('test put', function () {
+  it('should put', function () {
     expect(gen.next().value).toEqual(put({type: RECENT_RECIPES_REQUESTED, payload: {}}));
   });
 
@@ -62,6 +62,24 @@ describe('test fetchrecentRecipes saga actions', function () {
         recipes: data
       }
     });
+  });
+});
+
+describe('fetchRecipeSaga',()=>{
+  const action={
+    id:'testid'
+  };
+  const gen =callFetchRecipe(app, action);
+
+  it('test call', function () {
+      expect(gen.next().value).toEqual(call(fetchRecipe,app,action.id));
+  });
+
+  it('test put',function () {
+      expect(gen.next().value).toEqual(put({type:RECIPE_FETCH_REQUESTED,payload:{}}))
+  });
+  it('gen done', () => {
+    expect(gen.next()).toEqual({done: true, value: undefined});
   });
 });
 
