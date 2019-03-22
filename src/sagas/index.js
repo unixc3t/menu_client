@@ -1,15 +1,17 @@
 import {put, all, takeEvery, call, fork} from 'redux-saga/effects';
+import jwt from 'jsonwebtoken';
 import {
   getRecentRecipes,
   createRecipe,
   fetchRecipe,
-  signup
+  signup,
+  login
 } from '../services/api';
 //import {recentRecipes} from "../actions/actionCreator";
 import {
   RECENT_RECIPES_REQUESTED, RECENT_RECIPES_REQUESTED_ASYNC,
   ADD_RECIPE_ASYNC, RECIPE_FETCH_REQUESTED_ASYNC, RECIPE_FETCH_REQUESTED,
-  SIGNUP_ASYNC
+  SIGNUP_ASYNC,LOGIN_ASYNC,LOGIN
 } from "../actions/actionType";
 
 import {browserHistory} from "../store";
@@ -50,13 +52,25 @@ export function* fetchRecipeSaga(feathersApp){
 
 
 export function* callSignUp(feathersApp, action) {
-  const success = yield call(signup, feathersApp,action.username,action.password);
-  console.log(success);
+  const signupback = yield call(signup, feathersApp,action.email,action.password);
+  console.log('signupback=>',signupback);
   yield browserHistory.push('login');
 }
 
 export function* signupSaga(feathersApp){
   yield takeEvery(SIGNUP_ASYNC,callSignUp,feathersApp)
+}
+
+export function* callLogin(feathersApp, action) {
+  const user = yield call(login,feathersApp,action.email,action.password);
+
+  console.log('decode',jwt.decode(user.accessToken));
+  yield put({type:LOGIN,payload:{user}});
+  yield browserHistory.push('');
+}
+
+export function* loginSaga(feathersApp) {
+  yield takeEvery(LOGIN_ASYNC,callLogin,feathersApp)
 }
 
 export default function* root(feathersApp) {
@@ -65,6 +79,7 @@ export default function* root(feathersApp) {
     fork(recentRecipesSaga, feathersApp),
     fork(addRecipeSaga, feathersApp),
     fork(fetchRecipeSaga, feathersApp),
-    fork(signupSaga,feathersApp)
+    fork(signupSaga,feathersApp),
+    fork(loginSaga,feathersApp)
   ])
 }

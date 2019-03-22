@@ -9,6 +9,7 @@
     "feathers-hooks": "^2.1.2",
     "feathers-localstorage": "^4.0.0",
     "history": "^4.7.2",
+    "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.3",

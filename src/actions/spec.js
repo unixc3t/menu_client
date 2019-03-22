@@ -18,13 +18,17 @@ describe('ActionCreator', function () {
   });
 
   it('should create an action for review recipe', function () {
-    const expectedAction = Object.assign({},{type:types.RECIPE_FETCH_REQUESTED_ASYNC},{id:"testid"});
+    const expectedAction = Object.assign({}, {type: types.RECIPE_FETCH_REQUESTED_ASYNC}, {id: "testid"});
     expect(actions.fetchRecipe("testid")).toEqual(expectedAction);
   });
 
   it('should create an action for signup ', function () {
-    const expectedAction = Object.assign({},{type:types.SIGNUP_ASYNC},{username:'test',password:'1234'})
-    expect(actions.signup("test",'1234')).toEqual(expectedAction);
+    const expectedAction = Object.assign({}, {type: types.SIGNUP_ASYNC}, {email: 'test@gmail.com', password: '1234'});
+    expect(actions.signup("test@gmail.com", '1234')).toEqual(expectedAction);
+  });
+  it('should create an action for login ', function () {
+    const expectedAction = Object.assign({}, {type: types.LOGIN_ASYNC}, {email: 'test@gmail.com', password: '1234'});
+    expect(actions.login("test@gmail.com", '1234')).toEqual(expectedAction);
   });
 });
 

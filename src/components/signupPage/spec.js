@@ -20,7 +20,7 @@ describe('SignupPage',()=>{
 
   it('should call signup function when click submit button',()=>{
     wrapper.setState({
-      username:'test@gmail.com',
+      email:'test@gmail.com',
       password:'123456'
     });
     const Form =wrapper.find('Form');
@@ -28,7 +28,7 @@ describe('SignupPage',()=>{
       preventDefault
     });
     expect(signup.calledWith('test@gmail.com','123456')).toBe(true);
-    expect(wrapper.state('username')).toEqual('');
+    expect(wrapper.state('email')).toEqual('');
     expect(wrapper.state('password')).toEqual('');
   })
 

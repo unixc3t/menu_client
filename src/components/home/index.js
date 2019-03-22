@@ -6,6 +6,12 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../../actions/actionCreator';
 
 class Home extends Component {
+  constructor(props){
+    super(props);
+    console.log(this.props.user);
+// Retrieve the token from wherever you've stored it.
+
+  }
   render() {
     return <div>
       <Divider/>
@@ -17,7 +23,9 @@ class Home extends Component {
 
 const mapStateToProps = state => (
   {
-    recipes: state.recipes.recipes
+    recipes: state.recipes.recipes,
+    user:state.checkLogin.user
+
   });
 
 const mapDispatchToProps = dispatch => {

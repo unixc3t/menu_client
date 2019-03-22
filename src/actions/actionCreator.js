@@ -2,7 +2,8 @@ import {
   RECENT_RECIPES_REQUESTED_ASYNC,
   ADD_RECIPE_ASYNC,
   RECIPE_FETCH_REQUESTED_ASYNC,
-  SIGNUP_ASYNC
+  SIGNUP_ASYNC,
+  LOGIN_ASYNC
 } from "./actionType";
 
 export function recentRecipes() {
@@ -28,11 +29,19 @@ export function fetchRecipe(id) {
   }
 }
 
-export function signup(username, password) {
+export function signup(email, password) {
   return ({
       type: SIGNUP_ASYNC,
-      username,
+      email,
       password
     }
   )
+}
+
+export function login(email,password){
+  return({
+    type:LOGIN_ASYNC,
+    email,
+    password
+  })
 }

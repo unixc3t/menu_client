@@ -4,8 +4,10 @@ import {
 } from "react-router-redux";
 import recipes from './recipes';
 import currRecipe from './currRecipe';
+import checkLogin from './checkLogin';
 
 const rootReducer = combineReducers({
+  checkLogin,
   recipes,
   currRecipe,
   routing:routerReducer

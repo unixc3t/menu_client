@@ -7,7 +7,7 @@ class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: ''
     };
     this.handleSubmit=this.handleSubmit.bind(this);
@@ -15,9 +15,9 @@ class SignupPage extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.signup(this.state.username, this.state.password);
+    this.props.signup(this.state.email, this.state.password);
     this.setState({
-      username:'',
+      email:'',
       password:''
     })
   }
@@ -27,9 +27,9 @@ class SignupPage extends Component {
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
           <label>Email</label>
-          <input name='username'
-                 onChange={(e)=>{this.setState({username:e.target.value})}}
-                 value={this.state.username}
+          <input name='email'
+                 onChange={(e)=>{this.setState({email:e.target.value})}}
+                 value={this.state.email}
                  placeholder='Email'/>
         </Form.Field>
         <Form.Field>

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app'
+import Home from './components/home'
 import AddRecipe from './components/addRecipe';
 import SingleRecipe from './components/singleRecipe';
 import SignupPage from './components/signupPage';
@@ -23,7 +23,7 @@ const router = (
         </Header>
 
       <Switch>
-        <Route exact path="/" component={App} />
+        <Route exact path="/" component={Home} />
         <Route path="/recipes/add" component={AddRecipe}/>
         <Route path="/view/:recipeId" component={SingleRecipe}/>
         <Route path="/signup" component={SignupPage}/>

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 class SingleRecipe extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    //console.log(this.props);
     this.props.fetchRecipe(this.props.match.params.recipeId);
   }
 

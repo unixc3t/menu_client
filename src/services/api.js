@@ -29,12 +29,25 @@ export function fetchRecipe(app, id){
   }).then((data,err)=>data.data)
 }
 
-export function signup(app, username, password) {
+export function signup(app, email, password) {
   const users = app.service('users');
   return users.create({
-    username,
+    email,
     password
   }).then((data, err)=>{
     return data
   });
+}
+
+export function login(app,email,password){
+  return app.authenticate({
+    strategy:'local',
+    email,
+    password
+  }).then((resp)=>{
+    return resp ;
+  }).catch((err)=>{
+    console.log(err);
+    return {};
+  })
 }
