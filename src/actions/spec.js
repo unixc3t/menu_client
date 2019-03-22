@@ -21,5 +21,10 @@ describe('ActionCreator', function () {
     const expectedAction = Object.assign({},{type:types.RECIPE_FETCH_REQUESTED_ASYNC},{id:"testid"});
     expect(actions.fetchRecipe("testid")).toEqual(expectedAction);
   });
+
+  it('should create an action for signup ', function () {
+    const expectedAction = Object.assign({},{type:types.SIGNUP_ASYNC},{username:'test',password:'1234'})
+    expect(actions.signup("test",'1234')).toEqual(expectedAction);
+  });
 });
 

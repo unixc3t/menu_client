@@ -1,6 +1,6 @@
 import nock from 'nock';
 import {app} from '../store';
-import {fetchRecipe} from "./api";
+import {fetchRecipe,signup} from "./api";
 
 describe('Api Server', function () {
 
@@ -22,4 +22,18 @@ describe('Api Server', function () {
     const recipe = await fetchRecipe(app, '61cj0M9OuIIKAo8f');
     expect(recipe).toEqual(data);
   });
+
+  it('should create the user', async function () {
+    const data = {
+      username: 'test@gmail.com',
+      password: '123456'
+    };
+
+    let url = '/users';
+    nock('http://localhost:3030')
+      .post(url).reply(200, {...data});
+
+    const success = await signup(app,'test@gmail.com','123456');
+    expect(success).toEqual(data);
+  })
 });

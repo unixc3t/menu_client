@@ -28,3 +28,13 @@ export function fetchRecipe(app, id){
     }
   }).then((data,err)=>data.data)
 }
+
+export function signup(app, username, password) {
+  const users = app.service('users');
+  return users.create({
+    username,
+    password
+  }).then((data, err)=>{
+    return data
+  });
+}

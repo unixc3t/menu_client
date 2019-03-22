@@ -2,16 +2,17 @@ import {put, all, takeEvery, call, fork} from 'redux-saga/effects';
 import {
   getRecentRecipes,
   createRecipe,
-  fetchRecipe
+  fetchRecipe,
+  signup
 } from '../services/api';
-import {createBrowserHistory} from 'history';
 //import {recentRecipes} from "../actions/actionCreator";
 import {
   RECENT_RECIPES_REQUESTED, RECENT_RECIPES_REQUESTED_ASYNC,
-  ADD_RECIPE_ASYNC, RECIPE_FETCH_REQUESTED_ASYNC, RECIPE_FETCH_REQUESTED
+  ADD_RECIPE_ASYNC, RECIPE_FETCH_REQUESTED_ASYNC, RECIPE_FETCH_REQUESTED,
+  SIGNUP_ASYNC
 } from "../actions/actionType";
 
-const browserHistory = createBrowserHistory();
+import {browserHistory} from "../store";
 
 /*export function* helloSaga() {
   console.log('Hello Sagas!');
@@ -47,11 +48,23 @@ export function* fetchRecipeSaga(feathersApp){
   yield takeEvery(RECIPE_FETCH_REQUESTED_ASYNC, callFetchRecipe, feathersApp)
 }
 
+
+export function* callSignUp(feathersApp, action) {
+  const success = yield call(signup, feathersApp,action.username,action.password);
+  console.log(success);
+  yield browserHistory.push('login');
+}
+
+export function* signupSaga(feathersApp){
+  yield takeEvery(SIGNUP_ASYNC,callSignUp,feathersApp)
+}
+
 export default function* root(feathersApp) {
   yield all([
     //call(helloSaga),
     fork(recentRecipesSaga, feathersApp),
     fork(addRecipeSaga, feathersApp),
     fork(fetchRecipeSaga, feathersApp),
+    fork(signupSaga,feathersApp)
   ])
 }
