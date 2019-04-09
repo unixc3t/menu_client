@@ -63,9 +63,8 @@ export function* signupSaga(feathersApp){
 
 export function* callLogin(feathersApp, action) {
   const user = yield call(login,feathersApp,action.email,action.password);
-
-  console.log('decode',jwt.decode(user.accessToken));
-  yield put({type:LOGIN,payload:{user}});
+  let decode = jwt.decode(user.accessToken);
+  yield put({type:LOGIN,payload:{...decode}});
   yield browserHistory.push('');
 }
 

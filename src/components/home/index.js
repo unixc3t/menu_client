@@ -24,8 +24,7 @@ class Home extends Component {
 const mapStateToProps = state => (
   {
     recipes: state.recipes.recipes,
-    user:state.checkLogin.user
-
+    user:state.checkLogin
   });
 
 const mapDispatchToProps = dispatch => {
